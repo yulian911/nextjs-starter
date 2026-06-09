@@ -1,0 +1,32 @@
+export default function ConfirmEmailPage() {
+  const isAutoConfirmed = process.env.NODE_ENV === "development";
+
+  const content = isAutoConfirmed
+    ? {
+        emoji: "✅",
+        heading: "Registration successful",
+        description: "Your account has been created. You can now sign in.",
+        linkText: "Go to sign in",
+      }
+    : {
+        emoji: "📧",
+        heading: "Check your email",
+        description: "We've sent a confirmation link to your email address. Click it to activate your account.",
+        linkText: "Back to sign in",
+      };
+
+  return (
+    <div className="bg-cosmic flex min-h-screen items-center justify-center p-4">
+      <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-center text-white backdrop-blur-xl">
+        <div className="mb-4 text-5xl">{content.emoji}</div>
+        <h1 className="mb-3 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+          {content.heading}
+        </h1>
+        <p className="mb-6 text-blue-100/80">{content.description}</p>
+        <a href="/auth/signin" className="text-sm text-purple-300 hover:underline">
+          {content.linkText}
+        </a>
+      </div>
+    </div>
+  );
+}
